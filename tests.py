@@ -88,3 +88,19 @@ class TestBooksCollector:
         collector.add_book_in_favorites(book_name)
         collector.add_book_in_favorites(book_name)
         assert len(collector.get_list_of_favorites_books()) == 1
+
+    def test_delete_book_from_favorites(self):
+        collector = BooksCollector()
+        book_name = 'Народные сказки'
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+        collector.delete_book_from_favorites(book_name)
+        assert len(collector.get_list_of_favorites_books()) == 0
+
+    def test_get_list_of_favorites_books(self):
+        collector = BooksCollector()
+        book_name = 'Народные сказки Индии'
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+        check_get_list_of_favorites_books = len(collector.get_list_of_favorites_books())
+        assert check_get_list_of_favorites_books == 1
