@@ -21,9 +21,18 @@ class TestBooksCollector:
         collector.add_new_book('Преступление и наказание')
         collector.add_new_book('Война и Мир')
         assert len(collector.get_books_genre()) == 2
-
-    def test_add_new_book_add_two_books(self):
+    def test_set_book_genre(self):
         collector = BooksCollector()
-        collector.add_new_book('Му-му')
-        collector.add_new_book('Город N')
-        assert len(collector.get_books_genre()) == 2
+        book_name = 'Евгений Онегин'
+        genre_name = 'Фантастика'
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre_name)
+        assert collector.get_book_genre(book_name) == genre_name
+
+    def test_set_book_genre_set_invalid_genre(self):
+        collector = BooksCollector()
+        book_name = 'Летят утки'
+        genre_name = 'Животные'
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre_name)
+        assert len(collector.get_book_genre(book_name)) == 0
