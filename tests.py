@@ -19,7 +19,7 @@ class TestBooksCollector:
     def test_add_new_book_add_two_books(self):
         collector = BooksCollector()
         collector.add_new_book('Преступление и наказание')
-        collector.add_new_book('Война и Мир')
+        collector.add_new_book('Война и Мир 1')
         assert len(collector.get_books_genre()) == 2
     def test_set_book_genre(self):
         collector = BooksCollector()
@@ -52,3 +52,17 @@ class TestBooksCollector:
         collector.add_new_book('Колобок')
         collector.set_book_genre('Колобок', 'Мультфильмы')
         assert len(collector.get_books_with_specific_genre('Мультфильмы')) == 2
+
+    @pytest.mark.parametrize('book_name', ['Война и Мир том 1', 'Война и Мир том 2', 'Война и Мир том 3'])
+    def test_get_books_genre(self, book_name):
+        collector = BooksCollector()
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, 'Фантастика')
+        assert collector.get_books_genre().get(book_name) == collector.books_genre.get(book_name)
+
+    @pytest.mark.parametrize('book_name,genre_name', [['Маугли', 'Мультфильмы'], ['Евротур', 'Комедии']])
+    def test_get_books_for_children(self, book_name, genre_name):
+        collector = BooksCollector()
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre_name)
+        assert len(collector.get_books_for_children()) == 1
