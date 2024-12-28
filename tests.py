@@ -66,3 +66,10 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         collector.set_book_genre(book_name, genre_name)
         assert len(collector.get_books_for_children()) == 1
+
+    @pytest.mark.parametrize('book_name,genre_name', [['Пила', 'Ужасы'],['Дарья Донцова', 'Детективы']])
+    def test_get_books_for_children_neg(self, book_name, genre_name):
+        collector = BooksCollector()
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre_name)
+        assert len(collector.get_books_for_children()) == 0
