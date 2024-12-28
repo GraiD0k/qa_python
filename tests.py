@@ -2,6 +2,7 @@ from main import BooksCollector
 import pytest
 
 class TestBooksCollector:
+    @pytest.mark.parametrize('book_name', ['Самое большое название книги, которое было 123', ''])
 
     def test_add_new_book_add_two_books(self):
         collector = BooksCollector()
@@ -19,4 +20,10 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_new_book('Преступление и наказание')
         collector.add_new_book('Война и Мир')
+        assert len(collector.get_books_genre()) == 2
+
+    def test_add_new_book_add_two_books(self):
+        collector = BooksCollector()
+        collector.add_new_book('Му-му')
+        collector.add_new_book('Город N')
         assert len(collector.get_books_genre()) == 2
