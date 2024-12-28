@@ -73,3 +73,18 @@ class TestBooksCollector:
         collector.add_new_book(book_name)
         collector.set_book_genre(book_name, genre_name)
         assert len(collector.get_books_for_children()) == 0
+
+    def test_add_book_in_favorites(self):
+        collector = BooksCollector()
+        book_name = 'Народные сказки'
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+        assert ''.join(collector.get_list_of_favorites_books()) == book_name
+
+    def test_add_book_in_favorites_add_two_equal_books(self):
+        collector = BooksCollector()
+        book_name = 'Урфин Джус'
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+        collector.add_book_in_favorites(book_name)
+        assert len(collector.get_list_of_favorites_books()) == 1
